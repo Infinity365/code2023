@@ -1,0 +1,34 @@
+Segregate positive numbers from others i.e., move all non-positive numbers to the left side.
+#include<bits/stdc++.h>
+using namespace std;
+using namespace std;
+int main(){
+  int n;
+  cin>>n;
+  int ar[n];
+  int c=0;
+  for(int i=0;i<n;i++){
+    cin>>ar[i];
+    if(ar[i]<0)
+      c++;
+  }
+  int j=n-1;
+  for(int i=0;i<n-c;i++){
+    if(ar[i]<0){
+      if(ar[j]<0){
+        while(ar[j]<0 && j>0){
+          j--;
+        }
+        swap(ar[i],ar[j]);
+        
+      }
+      else{
+        swap(ar[i],ar[j]);
+      }
+    }
+  }
+for(int i=0;i<n;i++){
+  cout<<ar[i]<<" ";
+}
+  
+}
