@@ -1,4 +1,11 @@
-    int* findmaxmin(int ar[],int l,int r){
+/*
+In this q we have to find max and min ele from the unsorted array by the minimum comparison
+
+
+
+
+
+int* findmaxmin(int ar[],int l,int r){
         int min,max;
         max=INT_MIN;
         min=INT_MAX;
