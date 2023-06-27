@@ -1,5 +1,5 @@
 https://www.codingninjas.com/studio/problems/frog-jump_3621012?leftPanelTab=1
-
+//edit
 #include <bits/stdc++.h> 
 int fun(int ind,vector<int>&heights, vector<int>&dp){
     if(ind==0)
