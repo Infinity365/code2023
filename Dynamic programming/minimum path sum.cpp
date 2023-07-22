@@ -1,3 +1,36 @@
+//space optimized
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int n,m;
+        n=grid.size();
+        m=grid[0].size();
+       // vector<vector<int>> dp(n,vector<int>(m,0));
+        vector<int> prev(m,0);
+        for(int i=0;i<n;i++){
+            vector<int>cur(m,0);
+            for(int j=0;j<m;j++){
+                if(i==0 && j==0)
+                cur[j]=grid[i][j];
+
+                else{
+                    int left,right;
+left=right=INT_MAX;
+                    if(i>0){
+                        left=grid[i][j]+prev[j];
+                    }
+                    if(j>0){
+                        right=grid[i][j]+cur[j-1];
+                    }
+                    cur[j]=min(left,right);
+                }
+            }
+            prev=cur;
+        }
+        return prev[m-1];
+    }
+};
+
 //tabulation
 #include <bits/stdc++.h> 
 int minSumPath(vector<vector<int>> &grid) {
