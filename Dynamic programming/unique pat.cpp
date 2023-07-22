@@ -24,3 +24,33 @@ int uniquePaths(int m, int n) {
 	}
 	return dp[m-1][n-1];
 }
+
+// space optimized
+long long  numberOfPaths(int m, int n)
+{
+    // Code Here
+    vector<int> prev(n,0);
+    for(int i=0;i<m;i++){
+        vector<int> cur(n,0);
+        for(int j=0;j<n;j++){
+            if(i==0 && j==0)
+            cur[j]=1;
+            
+            else{
+                int left,down;
+                left=down=0;
+                if(i>0)
+                {
+                    left=prev[j];
+                }
+                if(j>0){
+                    down=cur[j-1];
+                }
+                cur[j]=left+down;
+            }
+        }
+        prev=cur;
+    }
+    return prev[n-1];
+    
+}
