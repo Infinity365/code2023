@@ -1,0 +1,56 @@
+//recurssion
+#include <bits/stdc++.h> 
+
+int fun(vector<int> weight, vector<int> profit, int n, int TW){
+	//base case
+	if(n==0){
+		if(TW>=weight[0])
+		return profit[0];
+
+		else
+		return 0;
+	}
+
+	int take,nottake;
+	nottake=fun(weight,profit,n-1,TW);
+	take=INT_MIN;
+	if(TW>=weight[n]){
+		take=profit[n]+fun(weight,profit,n-1,TW-weight[n]);
+	}
+
+	return max(take,nottake);
+}
+int knapsack(vector<int> weight, vector<int> value, int n, int maxWeight) 
+{
+
+return fun(weight,value,n-1,maxWeight);
+	
+}
+
+// tabulation
+
+
+#include <bits/stdc++.h> 
+
+int knapsack(vector<int> weight, vector<int> profit, int n, int TW) 
+{
+
+vector<vector<int>>dp(n,vector<int>(TW+1,0));
+
+for(int i=weight[0];i<=TW;i++){
+	dp[0][i]=profit[0];
+}
+for(int i=1;i<n;i++){
+	for(int j=1;j<=TW;j++){
+		int take,nottake;
+		take=INT_MIN;
+		nottake=dp[i-1][j];
+                if (j >= weight[i]) {
+                  take = profit[i] + dp[i - 1][j - weight[i]];
+                }
+				dp[i][j]=max(take,nottake);
+                }
+	}
+	return dp[n-1][TW];
+}
+	
