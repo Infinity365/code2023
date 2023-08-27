@@ -1,0 +1,45 @@
+//recurssion
+long long int fun(int coins[],int n,int target){
+      if(n==0){
+          if(target%coins[0]==0)
+          return 1;
+          else
+          return 0;
+      }
+      
+      long long int take,nottake;
+      take=0;
+      nottake=fun(coins,n-1,target);
+      if(target>=coins[n]){
+          take=fun(coins,n,target-coins[n]);
+      }
+      return take+nottake;
+  }
+    long long int count(int coins[], int N, int sum) {
+ return fun(coins,N-1,sum);
+      
+    }
+//tabulation
+  long long int count(int coins[], int n, int sum) {
+
+    vector<vector<long>>dp(n,vector<long>(sum+1,0));
+    //base case
+    for(int i=0;i<=sum;i++){
+        if(i%coins[0]==0)
+        dp[0][i]=1;
+        
+    }
+    for(int i=1;i<n;i++){
+        for(int j=0;j<=sum;j++){
+            long long int take,nottake;
+            take=0;
+            nottake=dp[i-1][j];
+            if(j>=coins[i]){
+                take=dp[i][j-coins[i]];
+            }
+            dp[i][j]=take+nottake;
+        }
+    }
+    long long int ans=dp[n-1][sum];
+    return ans;
+    }
