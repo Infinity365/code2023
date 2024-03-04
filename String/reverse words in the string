@@ -1,0 +1,41 @@
+https://leetcode.com/problems/reverse-words-in-a-string/
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+
+        ans=""
+        temp=""
+        # to trim starting and ending spaces inthe string
+        s=s.lstrip()
+        s=s.rstrip()
+        left=0
+        right=len(s)-1
+        prev=""
+
+        while(left<=right):
+            ch=s[left]
+            # if the word is finished then there wil be space but previously there should not be space which means a word is completed
+            if(ch==" " and s[prev]!=" "):
+                if(ans==""):
+                    ans=temp
+                else:
+                    ans=temp+" "+ans
+                temp=""
+            # it means we have encountered two spaces together and we need to ignore the extra spaces
+            elif(ch==" " and s[prev]==" "):
+                prev=left
+                left=left+1
+                continue
+            else:
+                temp+=ch
+            prev=left
+            left=left+1
+        
+        if(ans==""):
+            ans=temp
+        else:
+            ans=temp+" "+ans
+        return ans
+
+
+        
