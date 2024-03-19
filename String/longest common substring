@@ -1,0 +1,36 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n=len(s)
+        res=0
+        dp=[[0 for x in range(n)] for y in range(n)]
+        #for fillin 1 len str
+        for i in range(n):
+            dp[i][i]=1
+            res=s[i]
+        maxLength=1
+        # for 2 len str
+        for i in range(0,n-1):
+            if(s[i]==s[i+1]):
+                dp[i][i+1]=1
+                maxLength=2
+                res=s[i:i+maxLength]
+        # now we need to check for len>=3
+        k=3
+    
+        i=0
+
+        while(k<=n):
+            i=0
+            while(i<(n-k+1)):
+                j=i+k-1
+
+                if(s[i]==s[j] and dp[i+1][j-1]==1):
+                    dp[i][j]=1
+                    if(maxLength<k):
+                        maxLength=k
+                        res=s[i:j+1]
+
+                i+=1
+            k+=1
+        return res
+        
